@@ -2,15 +2,13 @@ from django.urls import reverse
 from rest_framework.test import APITestCase
 from recipes.models import Recipe
 from rest_framework import status
-from reciperk import settings
-
-settings.FIXTURE_DIRS = ('recipes/fixtures',)
 
 
 class AccountTests(APITestCase):
     fixtures = ['recipes/fixtures/recipes.yaml']
     recipes_url = reverse('recipes-list')
     recipe_id = '3c6a5111-c335-4f39-80ce-ca80bbefb410'
+    filter_recipe_id = '3c6a5111-c335-4f39-80ce-ca80bbefb411'
     recipe_url = f'{recipes_url}{recipe_id}/'
 
     def test_get_recipe(self):
@@ -35,6 +33,21 @@ class AccountTests(APITestCase):
     def test_list_recipes(self):
         response = self.client.get(self.recipes_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.json()), 2)
+
+    def test_search_recipes_name(self):
+        url_with_params = self.recipes_url + '?name=Filter'
+        response = self.client.get(url_with_params)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.json()), 1)
+        self.assertEqual(response.json()[0].get('id'), self.filter_recipe_id)
+
+    def test_search_recipes_description(self):
+        url_with_params = self.recipes_url + '?description=filtering'
+        response = self.client.get(url_with_params)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.json()), 1)
+        self.assertEqual(response.json()[0].get('id'), self.filter_recipe_id)
 
     def test_edit_recipe(self):
         data = {
