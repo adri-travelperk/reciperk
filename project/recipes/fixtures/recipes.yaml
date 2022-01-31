@@ -1,0 +1,30 @@
+-   model: recipes.recipe
+    pk: 3c6a5111-c335-4f39-80ce-ca80bbefb410
+    fields:
+        name: Fixture Test Recipe
+        description: A fixture test recipe.
+-   model: recipes.recipe
+    pk: 3c6a5111-c335-4f39-80ce-ca80bbefb411
+    fields:
+        name: Filter Test Recipe
+        description: A fixture test recipe to be found by filtering.
+-   model: recipes.ingredient
+    pk: 08af75bf-9a37-467c-b490-1db51b53182f
+    fields:
+        name: 'test ingredient #1'
+        recipe: 3c6a5111-c335-4f39-80ce-ca80bbefb410
+-   model: recipes.ingredient
+    pk: d7c5d21b-fc37-4aad-bf74-cd6abddbff2b
+    fields:
+        name: 'test ingredient #2'
+        recipe: 3c6a5111-c335-4f39-80ce-ca80bbefb410
+-   model: recipes.ingredient
+    pk: 08af75bf-9a37-467c-b490-1db51b531820
+    fields:
+        name: 'test ingredient #3'
+        recipe: 3c6a5111-c335-4f39-80ce-ca80bbefb411
+-   model: recipes.ingredient
+    pk: d7c5d21b-fc37-4aad-bf74-cd6abddbff21
+    fields:
+        name: 'test ingredient #4'
+        recipe: 3c6a5111-c335-4f39-80ce-ca80bbefb411
